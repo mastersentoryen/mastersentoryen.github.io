@@ -50,13 +50,29 @@
     .button-secondary { background: transparent; color: var(--ink); }
     .art { position: relative; min-height: 390px; display: grid; place-items: center; overflow: hidden; border: 1px solid #354747; border-radius: 48% 48% 10px 10px; background: radial-gradient(ellipse at 50% 46%, #29423d 0, #1a2b2e 48%, #101a1e 100%); isolation: isolate; }
     .art::before, .art::after { content: ""; position: absolute; inset: 0; z-index: 0; width: 42%; aspect-ratio: 1; margin: auto; border: 1px solid #b7e4c74d; border-radius: 50%; animation: listen-pulse 5.8s ease-out infinite; }
-    .orb { position: relative; z-index: 1; }
     .art::after { animation-delay: 2.9s; }
-    .orb { width: min(108%, 430px); height: auto; object-fit: contain; filter: drop-shadow(0 0 38px #b7e4c72a); animation: orb-alive 8s ease-in-out infinite; will-change: transform, filter; }
+    .orb-stage { position: relative; z-index: 1; width: min(108%, 430px); aspect-ratio: 1; display: grid; place-items: center; perspective: 900px; animation: orb-alive 8s ease-in-out infinite; will-change: transform; }
+    .orb { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 0 38px #b7e4c72a); animation: orb-rotate 44s linear infinite; will-change: transform; }
+    .star-track { position: absolute; inset: -3%; border: 1px solid #b7e4c74d; border-radius: 50%; transform-style: preserve-3d; animation: orbit-forward 26s linear infinite; pointer-events: none; }
+    .star-track::before, .star-track::after { content: ""; position: absolute; border-radius: 50%; }
+    .star-track::before { top: 2%; left: 50%; width: 7px; height: 7px; background: var(--lime); box-shadow: 0 0 17px #d7f171c9; }
+    .star-track::after { top: 50%; right: -3px; width: 4px; height: 4px; background: var(--mint); box-shadow: 0 0 12px #b7e4c7b3; }
+    .star-track-two { inset: 8%; border-color: #f4aa8250; animation-name: orbit-reverse; animation-duration: 34s; }
+    .star-track-two::before { background: var(--coral); box-shadow: 0 0 16px #f4aa82c9; }
+    .star-track-two::after { width: 5px; height: 5px; background: var(--lime); box-shadow: 0 0 13px #d7f171b3; }
     .art-caption { position: absolute; z-index: 2; bottom: 20px; left: 23px; color: #b8c6bc; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
     @keyframes orb-alive {
-      0%, 100% { transform: translate3d(0, 2px, 0) scale(.985) rotate(-1deg); filter: drop-shadow(0 0 30px #b7e4c721); }
-      50% { transform: translate3d(0, -7px, 0) scale(1.025) rotate(1deg); filter: drop-shadow(0 0 48px #b7e4c744); }
+      0%, 100% { transform: translate3d(0, 2px, 0) scale(.985); }
+      50% { transform: translate3d(0, -7px, 0) scale(1.025); }
+    }
+    @keyframes orb-rotate { to { transform: rotate(360deg); } }
+    @keyframes orbit-forward {
+      from { transform: rotateX(64deg) rotateZ(0deg); }
+      to { transform: rotateX(64deg) rotateZ(360deg); }
+    }
+    @keyframes orbit-reverse {
+      from { transform: rotateY(62deg) rotateZ(0deg); }
+      to { transform: rotateY(62deg) rotateZ(-360deg); }
     }
     @keyframes listen-pulse {
       0% { transform: scale(.6); opacity: 0; }
@@ -90,7 +106,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .button { transition: none; }
-      .orb, .art::before, .art::after { animation: none; }
+      .orb-stage, .orb, .star-track, .art::before, .art::after { animation: none; }
     }
   </style>
 </head>
@@ -112,8 +128,12 @@
             <a class="button button-secondary" href="https://github.com/mastersentoryen">Visit GitHub <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div class="art" role="img" aria-label="An abstract, attentive AI orb with flowing light and signal ripples">
-          <img class="orb" src="/ai-orb.webp" alt="">
+        <div class="art" role="img" aria-label="A luminous AI orb slowly rotating as small signal stars orbit around it">
+          <div class="orb-stage">
+            <img class="orb" src="/ai-orb.webp" alt="">
+            <span class="star-track" aria-hidden="true"></span>
+            <span class="star-track star-track-two" aria-hidden="true"></span>
+          </div>
           <span class="art-caption">Attentive · always learning</span>
         </div>
       </section>
