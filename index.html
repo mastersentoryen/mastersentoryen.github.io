@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a1e">
+  <meta name="description" content="Sentoryen helps teams understand the external security posture of assets they are authorised to monitor, with evidence, context, and clear next steps.">
+  <meta property="og:title" content="Sentoryen — Security posture, grounded in evidence">
+  <meta property="og:description" content="Understand authorised external assets through bounded monitoring, evidence-qualified findings, and practical remediation workflows.">
+  <meta property="og:type" content="website">
+  <title>Sentoryen — Security posture, grounded in evidence</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #eaf0e7;
+      --muted: #a6b4ad;
+      --bg: #101a1e;
+      --panel: #17252a;
+      --line: #2b3c3e;
+      --mint: #b7e4c7;
+      --lime: #d7f171;
+      --coral: #f4aa82;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 78% 10%, #24363a 0, transparent 36rem), var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 720; letter-spacing: .12em; font-size: .88rem; }
+    .mark { display: grid; place-items: center; width: 38px; height: 38px; color: var(--bg); background: var(--lime); border-radius: 12px 12px 12px 3px; font-weight: 850; letter-spacing: 0; font-size: 1.15rem; }
+    .nav-link { text-decoration: none; color: var(--muted); font-size: .92rem; }
+    .nav-link:hover, .text-link:hover { color: var(--lime); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr); gap: 52px; align-items: center; padding: 74px 0 96px; }
+    .eyebrow { display: flex; align-items: center; gap: 11px; color: var(--mint); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 700; }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: var(--mint); }
+    h1 { max-width: 700px; margin: 20px 0; font-size: clamp(3.1rem, 7vw, 5.8rem); line-height: .99; letter-spacing: -.065em; font-weight: 620; }
+    h1 span { color: var(--lime); }
+    .lead { max-width: 570px; color: var(--muted); font-size: clamp(1.02rem, 1.7vw, 1.2rem); }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin: 31px 0 0; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 18px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; font-weight: 650; font-size: .92rem; transition: transform .18s ease, border-color .18s ease; }
+    .button:hover { transform: translateY(-2px); border-color: var(--mint); }
+    .button-primary { background: var(--lime); color: #19201a; border-color: var(--lime); }
+    .button-secondary { background: transparent; color: var(--ink); }
+    .art { position: relative; min-height: 390px; display: grid; place-items: center; overflow: hidden; border: 1px solid #354747; border-radius: 48% 48% 10px 10px; background: linear-gradient(155deg, #223539, #142226 63%, #101a1e); }
+    .art::before, .art::after { content: ""; position: absolute; border: 1px solid #47615b; border-radius: 50%; transform: rotate(-28deg); }
+    .art::before { width: 290px; height: 440px; }
+    .art::after { width: 210px; height: 370px; border-color: #5a7465; }
+    .core { position: relative; z-index: 1; display: grid; place-items: center; width: 130px; height: 130px; border: 1px solid #d7f17190; border-radius: 50%; background: radial-gradient(circle, #d7f17122, #d7f17105 65%); box-shadow: 0 0 75px #d7f17117; }
+    .core svg { width: 58px; height: 58px; }
+    .orbit-dot { position: absolute; z-index: 2; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 16px var(--lime); }
+    .dot-one { top: 20%; right: 23%; }
+    .dot-two { bottom: 21%; left: 23%; background: var(--coral); box-shadow: 0 0 16px var(--coral); }
+    .art-caption { position: absolute; bottom: 20px; left: 23px; color: #b8c6bc; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    .section-label { color: var(--mint); font-size: .72rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 700; }
+    .intro { max-width: 700px; margin-bottom: 28px; }
+    h2 { margin: 8px 0 0; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.1; letter-spacing: -.04em; font-weight: 590; }
+    .capabilities { padding: 60px 0 76px; border-top: 1px solid var(--line); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 31px; }
+    .card { min-height: 210px; padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(145deg, #1a2a2e, #142125); }
+    .number { color: var(--lime); font-size: .76rem; font-weight: 700; letter-spacing: .1em; }
+    h3 { margin: 20px 0 8px; font-size: 1.18rem; letter-spacing: -.02em; }
+    .card p, .note p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .principle { display: grid; grid-template-columns: .8fr 1.2fr; gap: 42px; padding: 58px 0 70px; border-top: 1px solid var(--line); }
+    .principle blockquote { margin: 0; padding-left: 23px; border-left: 2px solid var(--coral); color: var(--ink); font-size: 1.35rem; line-height: 1.45; }
+    .principle blockquote span { color: var(--coral); }
+    .note { padding-top: 6px; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; padding: 24px 0 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    footer a { color: var(--ink); text-decoration-color: #60726a; text-underline-offset: 4px; }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 36px, 560px); }
+      header { padding: 20px 0; }
+      .hero { grid-template-columns: 1fr; gap: 40px; padding: 55px 0 70px; }
+      .art { min-height: 310px; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .principle { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="#top" aria-label="Sentoryen home"><span class="mark" aria-hidden="true">S</span><span>SENTORYEN</span></a>
+      <a class="nav-link" href="#approach">Our approach <span aria-hidden="true">↘</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">External security posture</p>
+          <h1 id="hero-title">See your exposure <span>with context.</span></h1>
+          <p class="lead">Sentoryen helps teams understand the security posture of assets they are authorised to monitor, using bounded observations, clear evidence, and practical next steps.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#approach">Explore the approach <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="https://github.com/mastersentoryen">Visit GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="art" aria-hidden="true">
+          <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
+          <div class="core"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 7 52 15v15c0 13-8.6 22.1-20 27C20.6 52.1 12 43 12 30V15L32 7Z" stroke="#d7f171" stroke-width="2"/><path d="m23 32 6 6 13-14" stroke="#b7e4c7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="29" stroke="#b7e4c7" stroke-opacity=".2"/></svg></div>
+          <span class="art-caption">Observe · understand · improve</span>
+        </div>
+      </section>
+
+      <section class="capabilities" id="approach" aria-labelledby="approach-title">
+        <div class="intro">
+          <span class="section-label">A measured approach</span>
+          <h2 id="approach-title">Useful security insight starts with trustworthy evidence.</h2>
+        </div>
+        <div class="cards">
+          <article class="card"><span class="number">01 / SCOPE</span><h3>Monitor authorised assets</h3><p>Asset ownership and assessment rules are established before monitoring begins. Discovery alone never grants permission to assess.</p></article>
+          <article class="card"><span class="number">02 / EVIDENCE</span><h3>Make observations explainable</h3><p>Bounded DNS, TLS, web, and email-policy observations feed versioned findings with confidence, limitations, and supporting evidence.</p></article>
+          <article class="card"><span class="number">03 / ACTION</span><h3>Plan the next step</h3><p>Teams can assign remediation and review risk in context. Acknowledging a finding does not mark it resolved; later evidence does.</p></article>
+        </div>
+      </section>
+
+      <section class="principle" aria-label="Safety principle">
+        <div><span class="section-label">Built around clear boundaries</span><h2>Permission comes first.</h2></div>
+        <div class="note"><blockquote>Monitoring is limited to assets with verified authority and an explicit policy. <span>No automatic scanning of newly discovered assets.</span></blockquote><p style="margin-top:18px">Findings describe observed evidence and its limits. They are not a certification, penetration test, or guarantee of security.</p></div>
+      </section>
+    </main>
+
+    <footer><span>© 2026 Sentoryen</span><span>Project updates on <a href="https://github.com/mastersentoryen">GitHub</a></span></footer>
+  </div>
+</body>
+</html>
