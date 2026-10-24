@@ -48,16 +48,20 @@
     .button:hover { transform: translateY(-2px); border-color: var(--mint); }
     .button-primary { background: var(--lime); color: #19201a; border-color: var(--lime); }
     .button-secondary { background: transparent; color: var(--ink); }
-    .art { position: relative; min-height: 390px; display: grid; place-items: center; overflow: hidden; border: 1px solid #354747; border-radius: 48% 48% 10px 10px; background: linear-gradient(155deg, #223539, #142226 63%, #101a1e); }
-    .art::before, .art::after { content: ""; position: absolute; border: 1px solid #47615b; border-radius: 50%; transform: rotate(-28deg); }
-    .art::before { width: 290px; height: 440px; }
-    .art::after { width: 210px; height: 370px; border-color: #5a7465; }
-    .core { position: relative; z-index: 1; display: grid; place-items: center; width: 130px; height: 130px; border: 1px solid #d7f17190; border-radius: 50%; background: radial-gradient(circle, #d7f17122, #d7f17105 65%); box-shadow: 0 0 75px #d7f17117; }
-    .core svg { width: 58px; height: 58px; }
-    .orbit-dot { position: absolute; z-index: 2; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 16px var(--lime); }
-    .dot-one { top: 20%; right: 23%; }
-    .dot-two { bottom: 21%; left: 23%; background: var(--coral); box-shadow: 0 0 16px var(--coral); }
+    .art { position: relative; min-height: 390px; display: grid; place-items: center; overflow: hidden; border: 1px solid #354747; border-radius: 48% 48% 10px 10px; background: radial-gradient(ellipse at 50% 46%, #29423d 0, #1a2b2e 48%, #101a1e 100%); isolation: isolate; }
+    .art::before, .art::after { content: ""; position: absolute; z-index: -1; width: 46%; aspect-ratio: 1; border: 1px solid #b7e4c74d; border-radius: 50%; animation: listen-pulse 5.8s ease-out infinite; }
+    .art::after { animation-delay: 2.9s; }
+    .orb { width: min(108%, 430px); height: auto; object-fit: contain; filter: drop-shadow(0 0 38px #b7e4c72a); animation: orb-alive 8s ease-in-out infinite; will-change: transform, filter; }
     .art-caption { position: absolute; bottom: 20px; left: 23px; color: #b8c6bc; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    @keyframes orb-alive {
+      0%, 100% { transform: translate3d(0, 2px, 0) scale(.985) rotate(-1deg); filter: drop-shadow(0 0 30px #b7e4c721); }
+      50% { transform: translate3d(0, -7px, 0) scale(1.025) rotate(1deg); filter: drop-shadow(0 0 48px #b7e4c744); }
+    }
+    @keyframes listen-pulse {
+      0% { transform: scale(.6); opacity: 0; }
+      18% { opacity: .65; }
+      100% { transform: scale(2.1); opacity: 0; }
+    }
     .section-label { color: var(--mint); font-size: .72rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 700; }
     .intro { max-width: 700px; margin-bottom: 28px; }
     h2 { margin: 8px 0 0; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.1; letter-spacing: -.04em; font-weight: 590; }
@@ -82,7 +86,11 @@
       .card { min-height: auto; }
       .principle { grid-template-columns: 1fr; gap: 20px; }
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button { transition: none; }
+      .orb, .art::before, .art::after { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -103,10 +111,9 @@
             <a class="button button-secondary" href="https://github.com/mastersentoryen">Visit GitHub <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div class="art" aria-hidden="true">
-          <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
-          <div class="core"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 7 52 15v15c0 13-8.6 22.1-20 27C20.6 52.1 12 43 12 30V15L32 7Z" stroke="#d7f171" stroke-width="2"/><path d="m23 32 6 6 13-14" stroke="#b7e4c7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="29" stroke="#b7e4c7" stroke-opacity=".2"/></svg></div>
-          <span class="art-caption">Observe · understand · improve</span>
+        <div class="art" role="img" aria-label="An abstract, attentive AI orb with flowing light and signal ripples">
+          <img class="orb" src="/ai-orb.webp" alt="">
+          <span class="art-caption">Attentive · always learning</span>
         </div>
       </section>
 
